@@ -60,7 +60,7 @@ describe Bike do
 		expect(bike.checkin_time).to eq t	
 	end
 
-	it "should know how long it has been gone for" do
+	xit "should know how long it has been gone for" do
 		bike.rent!
 		sleep 1
 		bike.return!

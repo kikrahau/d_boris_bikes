@@ -1,12 +1,26 @@
 class Docking_Station
 	IS_BROKEN = ->(bike){bike.broken?}
+	DEFAULT_CAPACITY = 20
 
-	def initialize(bikes=[])
-		@bikes = bikes
+	def initialize(options= {})
+		self.capacity = options.fetch(:capacity, capacity)
+		self.bikes = options.fetch(:bikes, [])
 	end
 
 	def bikes
-		@bikes
+		@bikes ||= []
+	end
+	
+	def bikes=(value)
+		@bikes = value
+	end
+	
+	def capacity
+		@capacity ||= DEFAULT_CAPACITY
+	end
+
+	def capacity=(value)
+		@capacity = value
 	end
 
 	def broken_bikes
@@ -29,5 +43,9 @@ class Docking_Station
 		broken = broken_bikes
 		broken_bikes.pop
 		broken
+	end
+
+	def full?
+		@bikes.length == capacity
 	end
 end

@@ -5,8 +5,8 @@ describe Docking_Station do
 	let(:bike) { double :bike, broken?: false }
 	let(:broken_bike) { double :broken_bike, broken?: true}
 
-	let(:station_with_bikes) { Docking_Station.new([bike]) }
-	let(:station_with_broken_bikes) {Docking_Station.new([broken_bike,bike])}
+	let(:station_with_bikes) { Docking_Station.new(bikes: [bike]) }
+	let(:station_with_broken_bikes) {Docking_Station.new(bikes: [broken_bike,bike])}
 
 	it "should return an empty array of bikes by default" do
 		expect(station.bikes).to eq []
@@ -37,5 +37,14 @@ describe Docking_Station do
 
 	it "should be able to release broken_bikes" do
 		expect(station_with_broken_bikes.release_broken_bikes).to eq [broken_bike]
+	end
+
+	it "should have a capacity" do
+		expect(station.capacity.class).to eq Fixnum
+	end
+
+	it "should know if it is full" do
+		20.times {station.dock(bike)}
+		expect(station).to be_full
 	end
 end
