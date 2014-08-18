@@ -32,5 +32,47 @@ describe Bike do
 		bike.fix!
 		expect(bike).not_to be_broken
 	end
-	
+
+	it "should know if it has been rented or not" do
+		expect(bike.rented?).to eq false
+	end
+
+	it "should be able to be rented by a user" do
+		bike.rent!
+		expect(bike.rented?).to eq true
+	end
+
+	it "should know the time it has been rented" do
+		t = Time.now.round(0)
+		bike.rent!
+		expect(bike.checkout_time).to eq t	
+	end
+
+	it "should be able to be returned by a user" do
+		bike.rent!
+		bike.return!
+		expect(bike.rented?).to eq false
+	end
+
+	it "should know the time it has been returned" do
+		t = Time.now.round(0)
+		bike.return!
+		expect(bike.checkin_time).to eq t	
+	end
+
+	it "should know how long it has been gone for" do
+		bike.rent!
+		sleep 1
+		bike.return!
+		expect(bike.seconds_rented).to eq 1
+	end
 end
+
+
+
+
+
+
+
+
+
