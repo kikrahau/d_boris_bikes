@@ -49,5 +49,4 @@ module BikeContainer
 	def full?
 		@bikes.length == capacity
 	end
-
 end
