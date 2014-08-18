@@ -4,6 +4,10 @@ describe Bike do
 
 	let(:bike) { Bike.new }
 
+	it "should have a serial number when created" do
+		expect(bike.serial).not_to be nil
+	end
+
 	it "should not be broken when it is created" do
 		expect(bike.broken?).to be false
 	end
