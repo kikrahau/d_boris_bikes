@@ -47,5 +47,5 @@ shared_examples "BikeContainer" do
 	it "should know if it is full" do
 		container.capacity.times {container.dock(bike)}
 		expect(container).to be_full
-	end	
+	end
 end

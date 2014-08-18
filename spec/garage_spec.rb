@@ -5,6 +5,7 @@ describe Garage do
 
 	let(:garage) { Garage.new }
 	let(:broken_bike) { double :bike, broken?: true}
+	let(:van) {double :van}
 
 	it_behaves_like "BikeContainer"
 
