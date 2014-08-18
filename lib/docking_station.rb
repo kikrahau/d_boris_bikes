@@ -24,4 +24,10 @@ class Docking_Station
 	def release_bike
 		@bikes.pop
 	end
+
+	def release_broken_bikes
+		broken = broken_bikes
+		broken_bikes.pop
+		broken
+	end
 end

@@ -36,6 +36,6 @@ describe Docking_Station do
 	end
 
 	it "should be able to release broken_bikes" do
-		expect(station_with_broken_bikes.release_bike).to eq [broken_bike]
+		expect(station_with_broken_bikes.release_broken_bikes).to eq [broken_bike]
 	end
 end
