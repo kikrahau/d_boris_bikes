@@ -4,7 +4,7 @@ class Bike
 
 	def initialize
 		@broken = false
-		@serial = 1
+		@serial = 123456789
 	end
 
 	def broken?
