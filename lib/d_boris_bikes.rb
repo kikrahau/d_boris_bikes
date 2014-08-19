@@ -32,18 +32,17 @@ class Bike
 
 	def rent!
 		@rented = true
-		t = Time.now
-		@checkout_time = t.round(0)
+		@checkout_time = Time.now.round(0)
 	end
 
 	def return!
 		@rented = false
-		t = Time.now
-		@checkin_time = t.round(0)
+		@checkin_time = Time.now.round(0)
 	end
 
 	def seconds_rented
-		time = @checkin_time - @checkout_time
-		time
+		@checkin_time - @checkout_time
 	end
+
+
 end
