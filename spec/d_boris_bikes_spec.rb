@@ -1,4 +1,5 @@
 require 'd_boris_bikes'
+require 'Timecop'
 
 describe Bike do
 
@@ -41,7 +42,7 @@ describe Bike do
 		expect(bike.rented?).to eq true
 	end
 
-	it "should know the time it has been rented" do
+	it "should know the time at which it has been rented" do
 		t = Time.now.round(0)
 		bike.rent!
 		expect(bike.checkout_time).to eq t	
@@ -53,17 +54,17 @@ describe Bike do
 		expect(bike.rented?).to eq false
 	end
 
-	it "should know the time it has been returned" do
+	it "should know the time at which it has been returned" do
 		t = Time.now.round(0)
 		bike.return!
 		expect(bike.checkin_time).to eq t	
 	end
 
-	xit "should know how long it has been gone for" do
+	it "should know how long it has been gone for" do
 		bike.rent!
-		sleep 1
+		Timecop.travel(100) # travels forward in time 100 seconds
 		bike.return!
-		expect(bike.seconds_rented).to eq 1
+		expect(bike.seconds_rented).to eq 100
 	end
 end
 
