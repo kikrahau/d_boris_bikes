@@ -14,8 +14,7 @@ describe Bike do
 	end
 
 	it "should have a unique serial number" do
-		bike1 = Bike.new
-		expect(bike.serial.to_s).not_to eq(bike1.serial.to_s)
+		expect(bike.serial.to_s).not_to eq(Bike.new.serial.to_s)
 	end
 
 
@@ -43,7 +42,7 @@ describe Bike do
 		expect(bike.rented?).to eq true
 	end
 
-	it "should know the time it has been rented" do
+	it "should know the time at which it has been rented" do
 		t = Time.now.round(0)
 		bike.rent!
 		expect(bike.checkout_time).to eq t	
