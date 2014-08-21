@@ -5,6 +5,7 @@ class Bike
 	def initialize
 		@broken = false
 		@rented = false
+		@serial = (1..9).inject(""){ |memo| memo += rand(9).to_s } 
 	end
 
 	def broken?
@@ -21,6 +22,20 @@ class Bike
 
 	def rented?
 		@rented
+	end
+	
+	def rent!
+		@rented = true
+		@checkout_time = Time.now.round(0)
+	end
+	
+	def return!
+		@rented = false
+		@checkin_time = Time.now.round(0)
+	end
+
+	def seconds_rented
+		@checkin_time - @checkout_time
 	end
 
 end

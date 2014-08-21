@@ -60,11 +60,17 @@ describe Bike do
 		expect(bike.checkin_time).to eq t	
 	end
 
-	xit "should know how long it has been gone for" do
+	it "should know it has been gone for 5 seconds" do
 		bike.rent!
-		sleep 1
+		sleep 5
 		bike.return!
-		expect(bike.seconds_rented).to eq 1
+		expect(bike.seconds_rented).to eq 5
+	end
+	it "should know it has been gone for 3 seconds" do 
+		bike.rent!
+		sleep 3
+		bike.return!
+		expect(bike.seconds_rented).to eq 3
 	end
 end
 
