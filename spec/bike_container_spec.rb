@@ -2,7 +2,7 @@ require 'bike_container'
 
 shared_examples "BikeContainer" do 
 
-	let(:container) { described_class.new }
+	let(:empty_container) { described_class.new }
 	let(:bike) { double :bike, broken?: false }
 	let(:broken_bike) { double :broken_bike, broken?: true}
 
@@ -10,7 +10,7 @@ shared_examples "BikeContainer" do
 	let(:container_with_broken_bikes) {described_class.new(bikes: [broken_bike,bike])}
 
 	it "should return an empty array of bikes by default" do
-		expect(container.bikes).to eq []
+		expect(empty_container.bikes).to eq []
 	end
 
 	it "should be able to be created containing bikes" do
@@ -19,8 +19,8 @@ shared_examples "BikeContainer" do
 	end
 
 	it "should be able to accept a bike" do
-		container.dock(bike)
-		expect(container.bikes).to eq [bike]
+		empty_container.dock(bike)
+		expect(empty_container.bikes).to eq [bike]
 	end
 
 	it "should be able to release a bike" do
@@ -41,11 +41,37 @@ shared_examples "BikeContainer" do
 	end
 
 	it "should have a capacity" do
-		expect(container.capacity.class).to eq Fixnum
+		expect(empty_container.capacity.class).to eq Fixnum
 	end
 
 	it "should know if it is full" do
-		container.capacity.times {container.dock(bike)}
-		expect(container).to be_full
+		empty_container.capacity.times {empty_container.dock(bike)}
+		expect(empty_container).to be_full
 	end
+	it "should be able to get bikes from a bike_container" do 
+		empty_container.get_bikes_from(container_with_broken_bikes)
+		expect(empty_container.bikes).to match_array([bike,broken_bike])
+	end
+	it "should not have bikes that been collected" do 
+		empty_container.get_bikes_from(container_with_broken_bikes)
+		expect(container_with_broken_bikes.bikes).to be_empty
+	end
+	it "should be able to get broken bikes from a bike_container" do
+		empty_container.get_broken_bikes_from(container_with_broken_bikes)
+		expect(empty_container.bikes).to match_array([broken_bike])
+	end
+	it "should not have bikes that been collected" do 
+		empty_container.get_broken_bikes_from(container_with_broken_bikes)
+		expect(container_with_broken_bikes.bikes).to match_array([bike])
+	end	 
+	it "should be able to get working bikes from a bike_container" do
+		empty_container.get_working_bikes_from(container_with_broken_bikes)
+		expect(empty_container.bikes).to match_array([bike])
+	end
+	it "should not have bikes that been collected" do 
+		empty_container.get_working_bikes_from(container_with_broken_bikes)
+		expect(container_with_broken_bikes.bikes).to match_array([broken_bike])
+	end	 
+
+
 end

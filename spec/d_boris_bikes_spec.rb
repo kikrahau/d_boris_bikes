@@ -1,4 +1,5 @@
 require 'd_boris_bikes'
+require 'Timecop'
 
 describe Bike do
 
@@ -55,17 +56,32 @@ describe Bike do
 	end
 
 	it "should know the time it has been returned" do
+		bike.rent!
 		t = Time.now.round(0)
 		bike.return!
 		expect(bike.checkin_time).to eq t	
 	end
 
-	xit "should know how long it has been gone for" do
+	it "should know it has been gone for 900 seconds" do
 		bike.rent!
-		sleep 1
+		Timecop.travel(900)
 		bike.return!
-		expect(bike.seconds_rented).to eq 1
+		expect(bike.seconds_rented).to eq 900
 	end
+
+	it "should know it has been gone for 1801 seconds" do 
+		bike.rent!
+		Timecop.travel(1801)
+		expect { bike.return! }.to raise_error BikeGoneTooLongError
+		expect(bike.seconds_rented).to eq 1801
+	end
+
+	it "should raise a custom error if it's been gone for more than half an hour" do
+		bike.rent!
+		Timecop.travel(1801)
+		expect{ bike.return! }.to raise_error(BikeGoneTooLongError, "You took the bike out for more than half an hour!")
+	end
+
 end
 
 
