@@ -1,6 +1,9 @@
 module BikeContainer
 
 	IS_BROKEN = ->(bike){bike.broken?}
+	IS_WORKING = ->(bike){!bike.broken?}
+	ALL = -> (bike) { true }
+
 	DEFAULT_CAPACITY = 20
 
 	def initialize(options= {})
@@ -10,6 +13,9 @@ module BikeContainer
 
 	def bikes
 		@bikes ||= []
+	end
+	def bikes_of_type(bike_type = ALL)
+		bikes.select &bike_type 
 	end
 	
 	def bikes=(value)
@@ -25,11 +31,11 @@ module BikeContainer
 	end
 
 	def broken_bikes
-		@bikes.select &IS_BROKEN 
+		bikes_of_type(IS_BROKEN)
 	end
 	
 	def working_bikes
-		@bikes.reject &IS_BROKEN
+		bikes_of_type(IS_WORKING)
 	end
 	
 	def dock(bike)
@@ -50,13 +56,17 @@ module BikeContainer
 		@bikes.length == capacity
 	end
 
-	def get_bikes_from(container)
-		@bikes += container.bikes
-		container.bikes.clear
+	def get_bikes_from(container, bike_type=ALL)
+		# all, broken, working
+		@bikes += container.bikes_of_type(bike_type)
+		container.bikes = container.bikes.reject &bike_type
 	end
 
 	def get_broken_bikes_from(container)
-		@bikes += container.broken_bikes
-		container.bikes = container.bikes.reject {|bike| bike.broken? }
+		get_bikes_from(container, IS_BROKEN)
+	end
+
+	def get_working_bikes_from(container)
+		get_bikes_from(container, IS_WORKING)
 	end
 end

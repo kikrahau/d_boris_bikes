@@ -64,6 +64,14 @@ shared_examples "BikeContainer" do
 		empty_container.get_broken_bikes_from(container_with_broken_bikes)
 		expect(container_with_broken_bikes.bikes).to match_array([bike])
 	end	 
+	it "should be able to get working bikes from a bike_container" do
+		empty_container.get_working_bikes_from(container_with_broken_bikes)
+		expect(empty_container.bikes).to match_array([bike])
+	end
+	it "should not have bikes that been collected" do 
+		empty_container.get_working_bikes_from(container_with_broken_bikes)
+		expect(container_with_broken_bikes.bikes).to match_array([broken_bike])
+	end	 
 
 
 end
