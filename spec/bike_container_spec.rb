@@ -27,18 +27,18 @@ shared_examples "BikeContainer" do
 		expect(empty_container.bikes).to eq [bike]
 	end
 
-	it "should know what broken_bikes it has" do
-		expect(container_with_broken_bikes.broken_bikes).to eq [broken_bike]
-	end	
+	# it "should know what broken_bikes it has" do
+	# 	expect(container_with_broken_bikes.broken_bikes).to eq [broken_bike]
+	# end	
 
-	it "should know what working bikes it has" do
-		expect(container_with_broken_bikes.working_bikes).to eq [bike]
-	end
+	# it "should know what working bikes it has" do
+	# 	expect(container_with_broken_bikes.working_bikes).to eq [bike]
+	# end
 
-	it "should be able to release broken_bikes" do
-		expect(container_with_broken_bikes.release_broken_bikes).to eq [broken_bike]
-	end
-
+	# it "should be able to release broken_bikes" do
+	# 	expect(container_with_broken_bikes.release_broken_bikes).to eq [broken_bike]
+	# end
+	
 	it "should have a capacity" do
 		expect(empty_container.capacity.class).to eq Fixnum
 	end
