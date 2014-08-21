@@ -1,3 +1,5 @@
+require 'csv'
+
 class BikeGoneTooLongError < StandardError
 	def message
 		"You took the bike out for more than half an hour!"
@@ -13,8 +15,14 @@ class Bike
 		@broken = false
 		@rented = false
 		@serial = (1..9).inject(""){ |memo| memo += rand(9).to_s } 
+		write_serial_to_csv		
 	end
 
+	def write_serial_to_csv
+		CSV.open("./lib/bikes.csv","a") do |csv|
+			csv << [@serial]
+		end 
+	end	
 	def broken?
 		@broken
 	end

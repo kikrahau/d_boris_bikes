@@ -1,3 +1,4 @@
+require 'csv'
 require 'd_boris_bikes'
 require 'Timecop'
 
@@ -79,6 +80,17 @@ describe Bike do
 		bike.rent!
 		Timecop.travel(1801)
 		expect{ bike.return! }.to raise_error(BikeGoneTooLongError, "You took the bike out for more than half an hour!")
+	end
+
+	it "should, on initialization, write its attributes to a CSV" do
+		bike1 = Bike.new
+		file = CSV.read("./lib/bikes.csv")
+		expect(file).to include([bike1.serial])
+	end
+	it "writes all attributes for a bike to a CSV row" do 
+		bike1 = Bike.new
+		file = CSV.read("./lib/bikes.csv")
+		expect(file.last).to eq [bike1.serial,bike1.broken?,bike1.rented?]
 	end
 
 end

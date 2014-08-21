@@ -1,4 +1,5 @@
 require 'bike_container'
+require 'csv'
 
 shared_examples "BikeContainer" do 
 
