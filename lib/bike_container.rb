@@ -49,4 +49,14 @@ module BikeContainer
 	def full?
 		@bikes.length == capacity
 	end
+
+	def get_bikes_from(container)
+		@bikes += container.bikes
+		container.bikes.clear
+	end
+
+	def get_broken_bikes_from(container)
+		@bikes += container.broken_bikes
+		container.bikes = container.bikes.reject {|bike| bike.broken? }
+	end
 end

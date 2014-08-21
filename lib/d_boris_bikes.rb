@@ -1,3 +1,10 @@
+class BikeGoneTooLongError < StandardError
+	def message
+		"You took the bike out for more than half an hour!"
+	end
+end
+
+
 class Bike
 
 	attr_reader :serial, :checkout_time, :checkin_time
@@ -32,6 +39,7 @@ class Bike
 	def return!
 		@rented = false
 		@checkin_time = Time.now.round(0)
+		raise BikeGoneTooLongError if seconds_rented > 1800
 	end
 
 	def seconds_rented
