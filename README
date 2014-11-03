@@ -1,0 +1,92 @@
+| [*Makers Academy*](http://www.makersacademy.com) | Week 2 |
+| ------------------------------------------------ | ------ |
+
+# Boris Bikes – revisited
+
+It's Boris Bikes again! A simple project aimed at getting us comfortable with object-oriented programming and its key paradigms. We're modelling a bike hire scheme in Ruby, having done a domain modelling exercise (on paper, creating CRC cards through group discussion) to get a grasp of how we want to approach the problem.
+
+This version is very similar to [`boring-bikes`](https://github.com/henryaj/boring-bikes) but with a few extra features, namely CSV import/export of bikes and bike serial numbers (which a real bike hire scheme would likely have).
+
+### Tests
+
+```
+Bike
+  should have a serial number when created
+  should have a nine-digit numerical serial number
+  should have a unique serial number
+  should not be broken when it is created
+  should be able to break
+  should be able to get fixed
+  should know if it has been rented or not
+  should be able to be rented by a user
+  should know the time at which it has been rented
+  should be able to be returned by a user
+  should know the time it has been returned
+  should know it has been gone for 900 seconds
+  should know it has been gone for 1801 seconds
+  should raise a custom error if it's been gone for more than half an hour
+  should, on initialization, write its attributes to a CSV
+
+Docking_Station
+  behaves like BikeContainer
+    should return an empty array of bikes by default
+    should be able to be created containing bikes
+    should be able to accept a bike
+    should be able to accept a bike
+    should have a capacity
+    should know if it is full
+    should be able to release a bike
+    should be able to get bikes from a bike_container
+    should not have bikes that been collected
+    should be able to get broken bikes from a bike_container
+    should not have bikes that been collected
+    should be able to get working bikes from a bike_container
+    should not have bikes that been collected
+
+Garage
+  fixes bikes as soon as it received them
+  behaves like BikeContainer
+    should return an empty array of bikes by default
+    should be able to be created containing bikes
+    should be able to accept a bike
+    should be able to accept a bike
+    should have a capacity
+    should know if it is full
+    should be able to release a bike
+    should be able to get bikes from a bike_container
+    should not have bikes that been collected
+    should be able to get broken bikes from a bike_container
+    should not have bikes that been collected
+    should be able to get working bikes from a bike_container
+    should not have bikes that been collected
+
+Person
+  should not have a bike by default
+  should be able to have a bike
+  should be able to ask the station to release a bike
+  should have a bike when the station releases a bike
+  should be able to ask the station to receive a bike
+  should not have a bike after returning it
+  should be able to break a bike
+
+Van
+  should be able to request broken bikes from a station
+  after requesting broken bikes should contain broken bikes
+  behaves like BikeContainer
+    should return an empty array of bikes by default
+    should be able to be created containing bikes
+    should be able to accept a bike
+    should be able to accept a bike
+    should have a capacity
+    should know if it is full
+    should be able to release a bike
+    should be able to get bikes from a bike_container
+    should not have bikes that been collected
+    should be able to get broken bikes from a bike_container
+    should not have bikes that been collected
+    should be able to get working bikes from a bike_container
+    should not have bikes that been collected
+
+Finished in 0.07522 seconds (files took 0.31444 seconds to load)
+64 examples, 0 failures
+```
